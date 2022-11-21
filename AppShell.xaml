@@ -6,9 +6,13 @@
     xmlns:local="clr-namespace:Operator"
     Shell.FlyoutBehavior="Disabled">
 
+
+
+
     <ShellContent
-        Title="Home"
+        Title="Главная"
         ContentTemplate="{DataTemplate local:LoginPage}"
-        Route="MainPage" />
+        Icon="icon_notes"/>
+
 
 </Shell>
