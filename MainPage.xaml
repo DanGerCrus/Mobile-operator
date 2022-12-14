@@ -3,6 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Operator.MainPage">
 
+
+    <ContentPage.MenuBarItems>
+        <MenuBarItem Text="File">
+            <MenuFlyoutItem Text="Save" Clicked="MenuFlyoutItem_Clicked"/>
+            <MenuFlyoutItem Text="Exit"/>
+        </MenuBarItem>
+
+        <MenuBarItem Text="Edit">
+            <MenuFlyoutItem Text="123"/>
+            <MenuFlyoutItem Text="Exrweit"/>
+        </MenuBarItem>
+
+        <MenuBarItem Text="Help">
+            <MenuFlyoutItem Text="Save"/>
+            <MenuFlyoutItem Text="Exit"/>
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>
+
+
+
     <ScrollView>
         <VerticalStackLayout
             Spacing="25"
@@ -37,5 +57,5 @@
 
         </VerticalStackLayout>
     </ScrollView>
-
+    
 </ContentPage>
