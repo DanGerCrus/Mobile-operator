@@ -1,24 +1,50 @@
-﻿namespace Operator;
+﻿using Newtonsoft.Json;
+using Operator.Models;
+
+namespace Operator;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+	private HttpClient client = new HttpClient();
+	private List<AbonentsInfo>AbonentsData= new List<AbonentsInfo>();
 
 	public MainPage()
 	{
 		InitializeComponent();
-	}
+		getData();
+    }
 
-	private void OnCounterClicked(object sender, EventArgs e)
+	private async void getData() {
+        var response = await client.GetAsync("http://localhost:64382/api/Abonents");
+        var json = await response.Content.ReadAsStringAsync();
+        var Data = JsonConvert.DeserializeObject<List<Models.AbonentsInfo>>(json);
+		Abonents.ItemsSource = Data;
+    }
+	
+	private async void delAbonent(int id)
 	{
-		count++;
+		await client.DeleteAsync($"http://localhost:64382/api/Abonents/{id}");
+        
+		getData();
+    }
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+    private void deleteAbonent_Clicked(object sender, EventArgs e)
+    {
+		var item = (sender as Button).BindingContext as AbonentsInfo;
+		if (item != null)
+		{
+			delAbonent(item.id_abonent);
+		}
+    }
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+    private async void changeAbonent_Clicked(object sender, EventArgs e)
+    {
+        var item = (sender as Button).BindingContext as AbonentsInfo;
+        await Navigation.PushModalAsync(new StaffEditAdd(item));
+    }
+
+    private async void newAbonent_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushModalAsync(new StaffEditAdd(null));
+    }
 }
-

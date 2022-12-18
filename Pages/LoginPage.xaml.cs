@@ -21,7 +21,7 @@ public partial class LoginPage : ContentPage
        
 		if (first != null)
 		{
-			
+
 		await Navigation.PushModalAsync(new MainPage());		
 			
 		}
@@ -29,6 +29,5 @@ public partial class LoginPage : ContentPage
 		{
             await DisplayAlert("Уведомление", "Неверный логин или пароль", "Ok!");
         }
-    }
-    
+    }    
 }
